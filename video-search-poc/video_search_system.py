@@ -229,8 +229,9 @@ class VideoSearchSystem:
                         score += 0.1
                         match_criteria.append("rating")
                 
-                # Only include if at least one criteria matches
-                if score > 0:
+                # Only include if ALL specified criteria match
+                criteria_count = len(criteria)
+                if len(match_criteria) == criteria_count and score > 0:
                     # Boost score based on video rating
                     score += (video.rating / 10.0) * 0.1
                     match_type = f"complex({','.join(match_criteria)})"
